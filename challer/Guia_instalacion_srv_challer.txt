@@ -1,0 +1,142 @@
+Instalacion de java
+
+sudo apt-get update
+
+sudo apt-get install default-jdk
+
+
+Instalacion de sbt
+
+echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
+sudo apt-get update
+sudo apt-get install sbt
+sbt -version
+
+se debe crear la siguiente ruta en la instancia de produccion
+
+/var/challer/dev/tmp
+
+
+ruta de los archivos log
+
+/opt/challer/log/dev
+
+
+
+Instalacion de nodejs 
+
+https://nodejs.org/en/
+
+sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+ 
+sudo apt-get install -y nodejs
+
+node --version
+
+npm --version
+
+
+Para instalar ffmpeg en ubuntu/debian
+
+https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
+
+Enlace de las versiones
+https://ffmpeg.org/releases/
+
+Instalacion de las dependecias
+
+sudo apt-get update -qq && sudo apt-get -y install \
+  autoconf \
+  automake \
+  build-essential \
+  cmake \
+  git-core \
+  libass-dev \
+  libfreetype6-dev \
+  libgnutls28-dev \
+  libsdl2-dev \
+  libtool \
+  libva-dev \
+  libvdpau-dev \
+  libvorbis-dev \
+  libxcb1-dev \
+  libxcb-shm0-dev \
+  libxcb-xfixes0-dev \
+  pkg-config \
+  texinfo \
+  wget \
+  yasm \
+  zlib1g-dev
+
+apt-get install libavcodec-extra
+
+Ensamblador utilizado por algunas bibliotecas
+sudo apt-get install nasm
+
+Codificador de video H.264
+sudo apt-get install libx264-dev
+
+Para descomprimir el archivo si esta en formato .xz se debe instalar xz-utils
+
+sudo apt install xz-utils
+
+Descomprimir el 
+
+tar -xf ffmpeg_4.3.orig.tar.xz
+
+Ingresar a la carpeta creada luego de descomprimir el archivo
+
+Ejecutar ./configure --enable-gpl --enable-libx264
+
+Ejecutar make
+
+Ejecutar make install
+
+
+Ruta donde se encuentran los archivos EraseVideos.sh y erasevideos.log /home/challer/script se debe crear un archivo vacio con el nombre de erasevideo.log
+
+Codigo del archivo EraseVideos.sh el cual borra los videos del archivo temporal /var/challer/dev/tmp el cual es ejecutado a traves del crontab
+
+
+#!/bin/bash
+path=/var/challer/dev/tmp
+day=$(date)
+if [ -d $path ]; then
+        cd $path
+        count=$(ls | wc -l)
+        if [ $count -gt 0 ]; then
+                rm  -rf *
+                echo archivos encontrados para ser eliminados $count el $day >> /home/challer/script/erasevideo.log
+
+        else
+                echo archivos encontrados $count , eliminados $count el $day >> /home/challer/script/erasevideo.log
+        fi
+fi
+
+
+Codigo en el crontab para la ejecucion del archivo EraseVideos.sh
+
+0 0-23/2 * * * root sh /home/challer/script/EraseVideos.sh
+
+
+Para la conexion a la base de datos se debe hacer a traves del cloud_sql_proxy para cual se coloco en el rc.local para que se ejecute al iniciar el sistema operativo y ademas corra como un servicio
+para verificar si el servicio esta corriendo se debe ejecutar el siguiente comamdo 
+
+systemctl status rc-local.service
+
+la ruta donde se encuentran los archivos necesarios para la conexion a traves del cloud_sql_proxy es la siguiente:
+
+/root/script
+
+en la cual se deben encontrar los siguientes archivos
+
+cloud_sql_proxy
+proxycloudsql.sh
+sporty-1529941329103-65c4bc11f16f.json
+
+Codido del archivo proxycloudsql.sh
+
+#!/bin/bash
+nohup ./root/script/cloud_sql_proxy -instances=sporty-1529941329103:us-central1:challer-bd=tcp:4398 -credential_file=/root/script/sporty-1529941329103-65c4bc11f16f.json &
+
