@@ -1,2 +1,0 @@
-# DockerHub
-Imagenes de Docker
