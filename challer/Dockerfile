@@ -1,6 +1,5 @@
 FROM ubuntu:18.04
 RUN apt-get -y update && \ 
-    apt-get -y upgrade && \
     apt-get -y install default-jdk
 
 RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
@@ -11,7 +10,8 @@ RUN apt-get -y install sbt
 RUN curl -sL https://deb.nodesource.com/setup_14.x | -E bash -
  
 RUN apt-get -y update && \
-    apt-get -y install nodejs
+    apt-get -y install nodejs \
+    apt-get -y install curl
 
 RUN apt-get -y update -qq && \ 
     apt-get -y install \
