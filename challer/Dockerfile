@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 RUN apt-get -y update && \ 
-    apt-get -y install default-jdk \
+    apt-get -y install default-jdk && \
     apt-get -y install curl
 
 RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
