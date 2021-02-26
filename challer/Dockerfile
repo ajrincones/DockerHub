@@ -18,7 +18,7 @@ FROM node:14
  
 #RUN apt-get -y update && \
 #    apt-get -y install nodejs
-RUN apt-get update && \
-	npm install 
+#RUN apt-get update && \
+#	npm install 
 
 CMD /bin/bash
