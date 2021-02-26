@@ -1,4 +1,4 @@
-FROM node:debian
+FROM node:14
 RUN apt-get -y update && \ 
     apt-get -y install \ 
         default-jdk
