@@ -35,13 +35,21 @@ RUN apt-get -y update && \
 		net-tools \
 		cmake \ 
 		software-properties-common \
-        ffmpeg
+        ffmpeg \
+        gcc \ 
+        g++ \
+        make
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
 RUN apt-get -y update && \
 	apt-get -y install nodejs
 
-ENV SBT_VERSION 0.13.15
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && \
+    apt-get install yarn
+ 
+ENV SBT_VERSION 1.4.1
 RUN curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
   dpkg -i sbt-$SBT_VERSION.deb && \
   rm sbt-$SBT_VERSION.deb && \
