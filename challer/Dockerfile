@@ -1,10 +1,14 @@
 FROM debian:latest
 RUN apt-get -y update && \ 
     apt-get -y install \ 
-        default-jdk
-#        curl \
-#        gnupg
+        default-jdk \
+        curl \
+        gnupg
 
+RUN curl -L https://deb.nodesource.com/setup_14.x | bash
+RUN apt-get -y update && \
+	apt-get -y install nodejs
+	
 #RUN wget https://bintray.com/artifact/download/sbt/debian/sbt-0.13.9.deb
 #RUN dpkg -i sbt-0.13.9.deb
 #RUN apt-get -y update && apt-get -y install sbt
@@ -14,8 +18,6 @@ RUN apt-get -y update && \
 #RUN apt-get -y update && \
 #    apt-get -y install sbt
 
-#RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
- 
 #RUN apt-get -y update && \
 #    apt-get -y install nodejs
 #RUN apt-get update && \
