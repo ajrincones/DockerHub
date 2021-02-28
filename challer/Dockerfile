@@ -72,6 +72,6 @@ RUN apt-get -y update && \
 #RUN apt-get update && \
 #	npm install 
 
-RUN mkdir /var/challer/dev/tmp
-RUN mkdir /opt/challer/log/dev
+RUN mkdir -p /var/challer/dev/tmp
+RUN mkdir -p /opt/challer/log/dev
 CMD /bin/bash
