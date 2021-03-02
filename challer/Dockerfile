@@ -35,10 +35,12 @@ RUN apt-get -y update && \
 		net-tools \
 		cmake \ 
 		software-properties-common \
-        ffmpeg \
-        gcc \ 
-        g++ \
-        make
+        	ffmpeg \
+        	gcc \ 
+        	g++ \
+        	make \
+		apache2
+
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
 RUN apt-get -y update && \
@@ -74,4 +76,11 @@ RUN apt-get -y update && \
 
 RUN mkdir -p /var/challer/dev/tmp
 RUN mkdir -p /opt/challer/log/dev
+RUN mkdir -p /opt/autodeploy_projects/DareU/prod1
+RUN cd /opt/autodeploy_projects/DareU/prod1 && git init
+RUN git pull 'https://sportsprofileinc:sporty$pro2019@github.com/sportsprofileinc/challer.git'
+RUN sed -i 's/ondareDBCalidad/challer/g' "/opt/autodeploy_projects/DareU/prod2/business-core/conf/application.conf"
+RUN sed -i 's/pQAAppSec01/pAppCh01/g' "/opt/autodeploy_projects/DareU/prod2/business-core/conf/application.conf"
+RUN sed -i 's/C9cg382g3D/U4caRRv38kv9/g' "/opt/autodeploy_projects/DareU/prod2/business-core/conf/application.conf"
+
 CMD /bin/bash
