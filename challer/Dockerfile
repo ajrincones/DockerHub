@@ -77,7 +77,7 @@ RUN apt-get -y update && \
 RUN mkdir -p /var/challer/dev/tmp
 RUN mkdir -p /opt/challer/log/dev
 RUN mkdir -p /opt/autodeploy_projects/DareU/prod1
-RUN cd /opt/autodeploy_projects/DareU/prod1 && git init \
+RUN cd /opt/autodeploy_projects/DareU/prod1 && git init && \
 	git pull 'https://sportsprofileinc:sporty$pro2019@github.com/sportsprofileinc/challer.git'
 RUN sed -i 's/ondareDBCalidad/challer/g' "/opt/autodeploy_projects/DareU/prod2/business-core/conf/application.conf"
 RUN sed -i 's/pQAAppSec01/pAppCh01/g' "/opt/autodeploy_projects/DareU/prod2/business-core/conf/application.conf"
