@@ -42,7 +42,7 @@ RUN apt-get -y update && \
 		apache2
 
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
+RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
 RUN apt-get -y update && \
 	apt-get -y install nodejs
 
