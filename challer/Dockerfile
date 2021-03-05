@@ -35,14 +35,15 @@ RUN apt-get -y update && \
 		net-tools \
 		cmake \ 
 		software-properties-common \
-        	ffmpeg \
-        	gcc \ 
-        	g++ \
-        	make \
+        ffmpeg \
+        gcc \ 
+        g++ \
+        make \
+		vim \
 		apache2
 
 
-RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get -y update && \
 	apt-get -y install nodejs
 
@@ -51,23 +52,23 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get update && \
     apt-get install yarn
  
-#ENV SBT_VERSION 1.4.1
-#RUN curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
-#  dpkg -i sbt-$SBT_VERSION.deb && \
-#  rm sbt-$SBT_VERSION.deb && \
-#  apt-get update && \
-#  apt-get install sbt && \
-#  sbt sbtVersion
+ENV SBT_VERSION 1.3.13
+RUN curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
+  dpkg -i sbt-$SBT_VERSION.deb && \
+  rm sbt-$SBT_VERSION.deb && \
+  apt-get update && \
+  apt-get install sbt && \
+  sbt sbtVersion
 
 
 #RUN wget https://bintray.com/artifact/download/sbt/debian/sbt-0.13.9.deb
 #RUN dpkg -i sbt-0.13.9.deb
 #RUN apt-get -y update && apt-get -y install sbt
 
-RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
-RUN curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | apt-key add
-RUN apt-get -y update && \
-    apt-get -y install sbt
+#RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
+#RUN curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | apt-key add
+#RUN apt-get -y update && \
+#    apt-get -y install sbt
 
 #RUN apt-get -y update && \
 #    apt-get -y install nodejs
