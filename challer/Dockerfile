@@ -1,4 +1,4 @@
-ROM ubuntu:16.04 as build
+FROM ubuntu:16.04 as build
 #ARG DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir -p /opt/autodeploy_projects/DareU/prod1/business-core
