@@ -77,14 +77,23 @@ RUN apt-get -y update && \
 
 RUN mkdir -p /var/challer/dev/tmp
 RUN mkdir -p /opt/challer/log/dev
+RUN mkdir -p /var/xcouty/certifieds
+RUN mkdir -p /var/xcouty/properties
+RUN mkdir -p /var/xcouty/tmp
 RUN mkdir -p /opt/autodeploy_projects/DareU/prod1
 RUN cd /opt/autodeploy_projects/DareU/prod1 && git init && \
 	git pull 'https://ajrincones:$Bs160315Re$@github.com/ajrincones/challer.git'
-RUN sed -i 's/ondareDBCalidad/challer/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
-RUN sed -i 's/pQAAppSec01/pAppCh01/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
-RUN sed -i 's/C9cg382g3D/U4caRRv38kv9/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
+#RUN sed -i 's/ondareDBCalidad/challer/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
+#RUN sed -i 's/pQAAppSec01/pAppCh01/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
+#RUN sed -i 's/C9cg382g3D/U4caRRv38kv9/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
 RUN cd /opt/autodeploy_projects/DareU/prod1/business-core && mkdir lib
 RUN chmod 777 -R /opt/autodeploy_projects/DareU/prod1/business-core/lib
+RUN chmod 777 -R /var/xcouty
 ADD https://repository-sd.s3.amazonaws.com/challer/utils_htc-1.0-SNAPSHOT.jar /opt/autodeploy_projects/DareU/prod1/business-core/lib
+ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/certifieds/xcouty.p12 /var/xcouty/certifieds
+ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/properties/apis.xml /var/xcouty/properties
+ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/properties/inputs.xml /var/xcouty/properties
+ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/ejecuta.jar /var/xcouty/tmp
+ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/script.sh /var/xcouty/tmp
 
 CMD /bin/bash
