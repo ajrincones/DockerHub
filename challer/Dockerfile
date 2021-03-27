@@ -39,8 +39,7 @@ RUN apt-get -y update && \
         gcc \ 
         g++ \
         make \
-		vim \
-		apache2
+		vim 
 
 
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
@@ -83,6 +82,10 @@ RUN mkdir -p /var/xcouty/tmp
 RUN mkdir -p /opt/autodeploy_projects/DareU/prod1
 RUN cd /opt/autodeploy_projects/DareU/prod1 && git init && \
 	git pull 'https://ajrincones:$Bs160315Re$@github.com/ajrincones/challer.git'
+RUN sed -i 's/localhost:4398/192.168.1.16:5432/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
+RUN sed -i 's/ondareDBCalidad/ondaredbcalidad/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
+RUN sed -i 's/pQAAppSec01/postgres/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
+RUN sed -i 's/C9cg382g3D/12345678/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
 #RUN sed -i 's/ondareDBCalidad/challer/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
 #RUN sed -i 's/pQAAppSec01/pAppCh01/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
 #RUN sed -i 's/C9cg382g3D/U4caRRv38kv9/g' "/opt/autodeploy_projects/DareU/prod1/business-core/conf/application.conf"
@@ -96,4 +99,6 @@ ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/properties/inputs.xml 
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/ejecuta.jar /var/xcouty/tmp
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/script.sh /var/xcouty/tmp
 
-CMD /bin/bash
+#CMD /bin/bash
+ENTRYPOINT [ "/usr/bin/sbt", "runProd 9001" ]
+CMD ["/opt/autodeploy_projects/DareU/prod1/business-core"]
