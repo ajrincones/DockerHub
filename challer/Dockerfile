@@ -100,5 +100,6 @@ ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/ejecuta.jar /var/x
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/script.sh /var/xcouty/tmp
 
 #CMD /bin/bash
-ENTRYPOINT [ "/usr/bin/sbt", "runProd 9001;" ]
+WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
+ENTRYPOINT [ "/usr/bin/sbt", "runProd 9001" ]
 CMD ["/opt/autodeploy_projects/DareU/prod1/business-core"]
