@@ -101,5 +101,5 @@ ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/script.sh /var/xco
 
 #CMD /bin/bash
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
-ENTRYPOINT [ "/usr/bin/sbt", "runProd 9001" ]
-CMD ["/opt/autodeploy_projects/DareU/prod1/business-core"]
+ENTRYPOINT ["/usr/bin/sbt"]
+CMD ["runProd 9001"]
