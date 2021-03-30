@@ -98,8 +98,8 @@ ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/properties/apis.xml /v
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/properties/inputs.xml /var/xcouty/properties
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/ejecuta.jar /var/xcouty/tmp
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/script.sh /var/xcouty/tmp
-
+ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
 #CMD /bin/bash
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
-ENTRYPOINT ["/usr/bin/sbt"]
-CMD ["runProd 9001"]
+RUN chmod +x /root/StartServer.sh
+ENTRYPOINT ["/root/StartServer.sh"]
