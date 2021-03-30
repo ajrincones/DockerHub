@@ -49,7 +49,7 @@ RUN apt-get -y update && \
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && \
-    apt-get install yarn
+    apt-get -y install yarn
  
 #ENV SBT_VERSION 1.3.13
 #RUN curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
