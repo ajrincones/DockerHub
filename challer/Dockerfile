@@ -39,7 +39,9 @@ RUN apt-get -y update && \
         gcc \ 
         g++ \
         make \
-		vim 
+		vim \
+		apache2 \
+		supervisor
 
 
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
@@ -102,4 +104,6 @@ ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
 #CMD /bin/bash
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
 RUN chmod +x /root/StartServer.sh
-ENTRYPOINT ["/root/StartServer.sh"]
+#ENTRYPOINT ["/root/StartServer.sh"]
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord"]
