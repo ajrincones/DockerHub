@@ -105,5 +105,5 @@ ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
 RUN chmod +x /root/StartServer.sh
 #ENTRYPOINT ["/root/StartServer.sh"]
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD https://repository-sd.s3.amazonaws.com/challer/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
