@@ -101,9 +101,10 @@ ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/properties/inputs.xml 
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/ejecuta.jar /var/xcouty/tmp
 ADD https://repository-sd.s3.amazonaws.com/challer/xcouty/tmp/script.sh /var/xcouty/tmp
 ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
-#CMD /bin/bash
-WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
+
+#ADD https://repository-sd.s3.amazonaws.com/challer/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#CMD ["/usr/bin/supervisord"]
 RUN chmod +x /root/StartServer.sh
-#ENTRYPOINT ["/root/StartServer.sh"]
-ADD https://repository-sd.s3.amazonaws.com/challer/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-CMD ["/usr/bin/supervisord"]
+WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
+ENTRYPOINT ["/usr/bin/sh","/root/StartServer.sh"]
+#CMD [ "bin/bash" ]
