@@ -41,7 +41,7 @@ RUN apt-get -y update && \
         make \
 		vim \
 		apache2 \
-		supervisor
+		nginx
 
 
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
@@ -106,5 +106,5 @@ ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
 #CMD ["/usr/bin/supervisord"]
 RUN chmod +x /root/StartServer.sh
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
-#ENTRYPOINT ["/root/StartServer.sh"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 CMD ["/root/StartServer.sh"]
