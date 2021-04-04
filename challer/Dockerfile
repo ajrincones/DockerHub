@@ -41,6 +41,7 @@ RUN apt-get -y update && \
         make \
 		vim \
 		apache2 \
+		bash \
 		supervisor
 
 
