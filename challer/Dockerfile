@@ -41,7 +41,6 @@ RUN apt-get -y update && \
         make \
 		vim \
 		apache2 \
-		bash \
 		supervisor
 
 
@@ -108,4 +107,4 @@ ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
 RUN chmod +x /root/StartServer.sh
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
 #ENTRYPOINT ["/root/StartServer.sh"]
-CMD ["bin/bash", "-c", /root/StartServer.sh]
+CMD ["bin/sh", "-c", /root/StartServer.sh]
