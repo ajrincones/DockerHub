@@ -106,5 +106,5 @@ ADD https://repository-sd.s3.amazonaws.com/challer/StartServer.sh /root
 #CMD ["/usr/bin/supervisord"]
 RUN chmod +x /root/StartServer.sh
 WORKDIR /opt/autodeploy_projects/DareU/prod1/business-core
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+#ENTRYPOINT ["nginx", "-g", "daemon off;"]
 CMD ["/root/StartServer.sh"]
